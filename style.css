@@ -1,0 +1,26 @@
+.display{
+    background-color:black;
+    height: 170px;
+    width:300px;
+}
+
+.calculator{
+    /* display:flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    height: 400px;
+    width: 300px;
+}
+
+.button{
+    height: 100px;
+    width: 100px;
+}
+
+.buttons{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+};
+
+/* style=" " */
