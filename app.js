@@ -1,24 +1,26 @@
 function add(x,y){
-    console.log(x+y);
-    return(x+y);
+    result = x+y;
+    console.log(result);
+    return(result);
 };
 
 function subtract(x,y){
-    console.log(x-y);
-    return(x-y);
+    result = x-y;
+    console.log(result);
+    return(result);
 };
 
 function multiply(x,y){
-    console.log(x*y);
-    return(x*y);
+    result = x*y;
+    console.log(result);
+    return(result);
 };
 
 function divide(x,y){
-    console.log(x/y);
-    return(x/y);
+    result = x/y;
+    console.log(result);
+    return(result);
 };
-
-console.log('hey')
 
 screen = document.querySelector('.display');
 
@@ -40,9 +42,83 @@ const buttons = document.querySelectorAll('.button')
 
 
 buttons.forEach((button)=>{
+    screenList = '';
+    console.log(screenList)
     button.addEventListener('click', ()=>{
-        screen.textContent = button.textContent;
+        
+        // for (i=0; i<screenList+1; i++){
+        //     screenList *= 10;
+        //     screenList += button.textContent[0];
+
+        // }
+        screenList += button.textContent;
+        screen.textContent = screenList;
         screen.style.color = 'red';
+        // if (button.textContent == '+' ||button.textContent == '-' ||button.textContent == '*' ||button.textContent == '/' ||button.textContent == '=' ){
+        //     screenList += button.textContent;
+        //     screen.textContent = screenList;
+        //     screen.style.color = 'red';
+        // }else{
+        //     screenList += parseFloat(button.textContent);
+        //     screen.textContent = screenList;
+        //     screen.style.color = 'red';
+        // }
+        
+        // firstNumber += screenList[0];
+
+        for (i=0; i<screenList.length-1; i++){
+            if (screenList[i] == '+'){
+                add(parseFloat(screenList.slice(0,i)),parseFloat(screenList.slice(i+1,screenList.length)));
+                res = result;
+                screen.textContent = result;
+
+            }
+
+            if (screenList[i] == '-'){
+                subtract(parseFloat(screenList.slice(0,i)),parseFloat(screenList.slice(i+1,screenList.length)));
+                res = result;
+                screen.textContent = result;
+
+            }
+            
+            if (screenList[i] == '*'){
+                multiply(parseFloat(screenList.slice(0,i)),parseFloat(screenList.slice(i+1,screenList.length)));
+                res = result;
+                screen.textContent = result;
+
+            }
+
+            if (screenList[i] == '/'){
+                divide(parseFloat(screenList.slice(0,i)),parseFloat(screenList.slice(i+1,screenList.length)));
+                res = result;
+                screen.textContent = result;
+
+            }
+        }
+        
+        if (button.textContent === '='){
+            for (i=0; i<screenList.length-1; i++){
+                if (screenList[i] == '+'){
+        		    add(parseFloat(res),parseFloat(screenList.slice(i+1,screenList.length)));
+                    screen.textContent = result;
+                }
+
+                if (screenList[i] == '-'){
+                    subtract(parseFloat(res),parseFloat(screenList.slice(i+1,screenList.length)));
+                    screen.textContent = result;
+                }
+                
+                if (screenList[i] == '*'){
+                    multiply(parseFloat(res),parseFloat(screenList.slice(i+1,screenList.length)));
+                    screen.textContent = result;
+                }
+
+                if (screenList[i] == '/'){
+                    divide(parseFloat(res),parseFloat(screenList.slice(i+1,screenList.length)));
+                    screen.textContent = result;
+                }
+            }
+        }; 
     });
 })
 
@@ -55,7 +131,4 @@ buttons.forEach((button)=>{
 // };
 
 
-function display(){
-    
-};
 
