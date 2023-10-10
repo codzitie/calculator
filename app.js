@@ -23,8 +23,7 @@ function divide(x,y){
 };
 
 screen = document.querySelector('.display');
-
-
+subScreen = document.querySelector('.sub-display')
 
 const button1 = document.querySelector('.b1');
 const button2 = document.querySelector('.b2');
@@ -39,10 +38,14 @@ const button10 = document.querySelector('.b10');
 const button11 = document.querySelector('.b11');
 
 const buttons = document.querySelectorAll('.button')
-
+let num = 0;
+firstValue = 0;
 
 buttons.forEach((button)=>{
+
+    
     screenList = '';
+    subScreenList = '';
     console.log(screenList)
     button.addEventListener('click', ()=>{
         
@@ -52,9 +55,13 @@ buttons.forEach((button)=>{
 
         // }
         screenList += button.textContent;
+        console.log(screenList);
+        len = screenList.length;
         screen.textContent = screenList;
-        screen.style.color = 'red';
-        // if (button.textContent == '+' ||button.textContent == '-' ||button.textContent == '*' ||button.textContent == '/' ||button.textContent == '=' ){
+        // subScreen.textContent = 'load'
+        // screen.style.color = 'red';
+        // subScreen.style.color = 'red';
+        
         //     screenList += button.textContent;
         //     screen.textContent = screenList;
         //     screen.style.color = 'red';
@@ -63,64 +70,70 @@ buttons.forEach((button)=>{
         //     screen.textContent = screenList;
         //     screen.style.color = 'red';
         // }
-        
-        // firstNumber += screenList[0];
+        if (firstValue == 0 && screenList.charAt(screenList.length - 1) == '+'){
+            num = parseFloat(screenList.slice(0,screenList.indexOf('+')));
+            console.log(num,'num');
+            firstValue += 1;
+        };
+        // var num = parseFloat(screenList.slice(0,screenList.indexOf('+')));
+        // console.log(num,'num')
+        console.log(num,'num');
 
-        for (i=0; i<screenList.length-1; i++){
+        if (button.textContent == '+' ||button.textContent == '-' ||button.textContent == '*' ||button.textContent == '/' ||button.textContent == '=' ){
+            for (i=0; i<len-1; i++){
             if (screenList[i] == '+'){
-                add(parseFloat(screenList.slice(0,i)),parseFloat(screenList.slice(i+1,screenList.length)));
-                res = result;
-                screen.textContent = result;
 
+                add(num,parseFloat(screenList.slice(i+1,screenList.length)));
+                subScreen.textContent = result;
+                screenList= result.toString() + button.textContent;
+                num = result;
+                screen.textContent = result + button.textContent;
+                break;
+
+                // subScreen.style.color = 'red';
             }
 
             if (screenList[i] == '-'){
                 subtract(parseFloat(screenList.slice(0,i)),parseFloat(screenList.slice(i+1,screenList.length)));
-                res = result;
-                screen.textContent = result;
+                subScreen.textContent = result;
+                screenList= result.toString() + button.textContent;
+                num = result;
+                screen.textContent = result + button.textContent;
+                break;
 
             }
             
             if (screenList[i] == '*'){
                 multiply(parseFloat(screenList.slice(0,i)),parseFloat(screenList.slice(i+1,screenList.length)));
-                res = result;
-                screen.textContent = result;
+                subScreen.textContent = result;
+                screenList= result.toString() + button.textContent;
+                num = result;
+                screen.textContent = result + button.textContent;
+                break;
 
             }
 
             if (screenList[i] == '/'){
                 divide(parseFloat(screenList.slice(0,i)),parseFloat(screenList.slice(i+1,screenList.length)));
-                res = result;
-                screen.textContent = result;
+                subScreen.textContent = result;
+                screenList= result.toString() + button.textContent;
+                num = result;
+                screen.textContent = result + button.textContent;
+                break;
 
             }
         }
         
         if (button.textContent === '='){
-            for (i=0; i<screenList.length-1; i++){
-                if (screenList[i] == '+'){
-        		    add(parseFloat(res),parseFloat(screenList.slice(i+1,screenList.length)));
-                    screen.textContent = result;
-                }
-
-                if (screenList[i] == '-'){
-                    subtract(parseFloat(res),parseFloat(screenList.slice(i+1,screenList.length)));
-                    screen.textContent = result;
-                }
-                
-                if (screenList[i] == '*'){
-                    multiply(parseFloat(res),parseFloat(screenList.slice(i+1,screenList.length)));
-                    screen.textContent = result;
-                }
-
-                if (screenList[i] == '/'){
-                    divide(parseFloat(res),parseFloat(screenList.slice(i+1,screenList.length)));
-                    screen.textContent = result;
-                }
-            }
+            screen.textContent = result;
         }; 
+
+        }
+        
     });
 })
+
+
 
 
 // for (i=0; i=20; i++){
